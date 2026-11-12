@@ -2,6 +2,24 @@
 
 React 19 SPA with TanStack Router, TanStack Query, Leaflet, and Tailwind 4.
 
+> **This is the only copy of the GAM UI.** Every stack repo (`green-algeria-map`,
+> `gam-backend-springboot`, `gam-backend-go`, `gam-laravel`, `gam-platform`)
+> consumes it as a pinned git submodule at `frontend/`. Change the UI here, then
+> bump the submodule pointer in each consumer — never edit a copy inside them.
+>
+> The API base is `VITE_API_URL`; there is no backend switch. Any GAM backend
+> that passes `gam-contract` conformance serves the same responses.
+
+## Container
+
+```bash
+docker build --build-arg VITE_API_URL=http://localhost:8080 -t gam-frontend .
+docker run --rm -p 3000:80 gam-frontend
+```
+
+Multi-stage build → nginx with SPA fallback and immutable asset caching. Used by
+every stack repo's compose file and by the kind/k8s manifests.
+
 ## Source layout
 
 ```
