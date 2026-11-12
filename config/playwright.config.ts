@@ -46,7 +46,9 @@ export default defineConfig({
       command: 'scripts/e2e-start.sh',
       url: 'http://localhost:8080/api/live',
       reuseExistingServer: !process.env.CI,
-      cwd: '../../backend-nestjs',
+      // Override with E2E_API_DIR when the frontend and backend repos are
+      // checked out side by side (e.g. ../green-algeria-map/backend-nestjs).
+      cwd: process.env.E2E_API_DIR ?? '../../backend-nestjs',
       timeout: 120_000,
     },
     {
